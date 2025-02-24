@@ -6,7 +6,7 @@ export default function Chatbot() {
   const [input, setInput] = useState("");
   const [loading, setLoading] = useState(false);
 
-  const API_URL = process.env.NEXT_PUBLIC_API_URL;
+  const API_URL = "https://chatbot-backend-peach.vercel.app" || "http://localhost:3000";
 
   const sendMessage = async () => {
     if (!input.trim()) return;
