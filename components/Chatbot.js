@@ -46,50 +46,54 @@ export default function Chatbot() {
   };
 
   return (
-    <div className="max-w-lg mx-auto bg-gray-900 text-white p-5 rounded-lg shadow-lg flex flex-col h-[500px]">
-      <h2 className="text-xl font-bold text-center mb-3">ChatBot AI</h2>
-      <div
-        className="flex-1 overflow-y-auto p-2 border border-gray-700 rounded-md"
-        ref={chatContainerRef}
-      >
+    <div className="max-w-lg mx-auto bg-gray-900 text-white p-5 rounded-xl shadow-2xl flex flex-col h-[550px]">
+      {/* Título */}
+      <h2 className="text-2xl font-semibold text-center mb-4">ChatBot AI 🤖</h2>
+
+      {/* Área de Mensajes */}
+      <div className="flex-1 overflow-y-auto p-3 border border-gray-700 rounded-lg space-y-2">
         {messages.map((msg, index) => (
           <motion.div
             key={index}
             initial={{ opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.3 }}
-            className={`p-3 my-2 w-fit max-w-xs rounded-md text-sm ${
+            className={`p-3 my-1 max-w-xs rounded-2xl text-sm shadow-md ${
               msg.role === "user"
-                ? "bg-blue-500 text-white self-end ml-auto"
-                : "bg-gray-700 text-white"
+                ? "bg-blue-600 text-white self-end ml-auto"
+                : "bg-purple-600 text-white"
             }`}
           >
             {msg.content}
           </motion.div>
         ))}
+
+        {/* Indicador de Carga */}
         {loading && (
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ duration: 0.5 }}
-            className="text-gray-400 text-sm mt-2"
+            className="text-gray-400 text-sm mt-2 animate-pulse"
           >
             Escribiendo...
           </motion.div>
         )}
       </div>
+
+      {/* Input y Botón */}
       <div className="flex mt-3">
         <input
-          className="flex-1 p-2 border rounded-l-md text-black"
+          className="flex-1 p-2 border border-gray-700 rounded-l-lg text-black outline-none focus:ring-2 focus:ring-blue-500"
           type="text"
-          placeholder="Escribe tu mensaje"
+          placeholder="Escribe tu mensaje..."
           value={input}
           onChange={(e) => setInput(e.target.value)}
           onKeyDown={(e) => e.key === "Enter" && sendMessage()}
         />
         <button
           onClick={sendMessage}
-          className="bg-blue-500 px-4 py-2 rounded-r-md text-white"
+          className="bg-gradient-to-r from-blue-500 to-purple-600 px-5 py-2 rounded-r-lg text-white font-semibold transition hover:opacity-80 disabled:opacity-50"
           disabled={loading}
         >
           {loading ? "..." : "Enviar"}
