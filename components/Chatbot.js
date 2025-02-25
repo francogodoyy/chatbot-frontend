@@ -20,7 +20,6 @@ export default function Chatbot() {
 
   const sendMessage = async () => {
     if (!input.trim()) return;
-
     const newMessage = { role: "user", content: input };
     setMessages([...messages, newMessage]);
     setInput("");
